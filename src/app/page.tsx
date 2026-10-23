@@ -1,3 +1,4 @@
+import { SiteFooter } from "@/components/Editorial";
 import Hero from "@/components/Hero";
 import Approach from "@/components/Approach";
 import Destinations from "@/components/Destinations";
@@ -27,6 +28,7 @@ export default function Home() {
         </div>
         <Enquiry />
       </main>
+      <SiteFooter />
     </>
   );
 }

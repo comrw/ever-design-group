@@ -119,3 +119,12 @@
     right: var(--gutter);
   }
 }
+
+.pill a[aria-current="page"] { color: var(--orange); }
+.interior { --u: 1px; --gutter: clamp(24px, 4vw, 80px); }
+.interior .logo { top: 20px; }
+.interior .pill { left: 50%; transform: translateX(-50%); width: 460px; }
+.interior .pill ul { padding: 0 24px; justify-content: space-between; gap: 24px; }
+.interior .pill li { width: auto; }
+.interior .menu { max-height: calc(100svh - 110px); overflow-y: auto; }
+@media(max-width:1023px) { .menu { max-height: calc(100svh - 100px); overflow-y:auto; } .interior .menuToggle { right: var(--gutter); } }

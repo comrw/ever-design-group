@@ -1,19 +1,32 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import EverAction from "./EverAction";
 import styles from "./SiteHeader.module.css";
 import logo from "../../public/brand/ever-logo.png";
 
 const NAV = [
-  { label: "Home", href: "#top" },
-  { label: "Approach", href: "#approach" },
-  { label: "Destinations", href: "#destinations" },
-  { label: "Studio", href: "#studio" },
+  { label: "Home", href: "/" },
+  { label: "Developments", href: "/developments" },
+  { label: "Services", href: "/services" },
+  { label: "Studio", href: "/about" },
+];
+const MORE = [
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Places", href: "/areas" },
+  { label: "How we work", href: "/process" },
+  { label: "Films & visits", href: "/films" },
 ];
 
-export default function SiteHeader() {
+export default function SiteHeader({
+  interior = false,
+}: {
+  interior?: boolean;
+}) {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -30,7 +43,10 @@ export default function SiteHeader() {
     };
     const onPointer = (event: PointerEvent) => {
       const target = event.target as Node;
-      if (!panelRef.current?.contains(target) && !toggleRef.current?.contains(target)) {
+      if (
+        !panelRef.current?.contains(target) &&
+        !toggleRef.current?.contains(target)
+      ) {
         setOpen(false);
       }
     };
@@ -44,22 +60,38 @@ export default function SiteHeader() {
   }, [open]);
 
   return (
-    <header className={styles.header}>
-      <a className={styles.logo} href="#top" aria-label="Ever Design Group, back to top">
-        <Image src={logo} alt="Ever Design Group" fill sizes="140px" priority className={styles.logoImage} />
-      </a>
+    <header className={`${styles.header} ${interior ? styles.interior : ""}`}>
+      <Link
+        className={styles.logo}
+        href="/"
+        aria-label="Ever Design Group home"
+      >
+        <Image
+          src={logo}
+          alt="Ever Design Group"
+          fill
+          sizes="140px"
+          priority
+          className={styles.logoImage}
+        />
+      </Link>
 
       <nav className={styles.pill} aria-label="Primary">
         <ul>
           {NAV.map((item) => (
             <li key={item.href}>
-              <a href={item.href}>{item.label}</a>
+              <Link
+                href={item.href}
+                aria-current={pathname === item.href ? "page" : undefined}
+              >
+                {item.label}
+              </Link>
             </li>
           ))}
         </ul>
       </nav>
 
-      <EverAction href="#enquiry" className={styles.action} />
+      <EverAction href="/contact" className={styles.action} />
 
       <button
         ref={toggleRef}
@@ -75,11 +107,19 @@ export default function SiteHeader() {
       <div ref={panelRef} id={menuId} className={styles.menu} hidden={!open}>
         <nav aria-label="Mobile">
           <ul>
-            {[...NAV, { label: "Start a project", href: "#enquiry" }].map((item) => (
+            {[
+              ...NAV,
+              ...MORE,
+              { label: "Start a project", href: "/contact" },
+            ].map((item) => (
               <li key={item.href}>
-                <a href={item.href} onClick={() => setOpen(false)}>
+                <Link
+                  href={item.href}
+                  aria-current={pathname === item.href ? "page" : undefined}
+                  onClick={() => setOpen(false)}
+                >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
