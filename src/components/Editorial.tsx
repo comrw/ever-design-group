@@ -4,17 +4,13 @@ import type { ReactNode } from "react";
 import SiteHeader from "./SiteHeader";
 import { contact, sourceImage } from "@/content/ever";
 export function PageHero({
-  eyebrow,
   title,
   intro,
   image,
-  caption,
 }: {
-  eyebrow: string;
   title: string;
   intro: string;
   image: string;
-  caption?: string;
 }) {
   return (
     <section className="pageHero">
@@ -29,17 +25,11 @@ export function PageHero({
       />
       <div className="pageHeroShade" />
       <div className="pageHeroCopy">
-        <p className="kicker" data-reveal>
-          {eyebrow}
-        </p>
         <h1 data-reveal>{title}</h1>
         <p className="pageIntro" data-reveal>
           {intro}
         </p>
       </div>
-      <span className="imageCaption">
-        {caption ?? "EVER DESIGN GROUP / RWANDA"}
-      </span>
       <a
         className="heroScroll"
         href="#page-content"
@@ -51,12 +41,10 @@ export function PageHero({
   );
 }
 export function Section({
-  label,
   title,
   children,
   dark = false,
 }: {
-  label?: string;
   title?: string;
   children: ReactNode;
   dark?: boolean;
@@ -64,7 +52,6 @@ export function Section({
   return (
     <section className={`editorialSection ${dark ? "darkSection" : ""}`}>
       <div className="sectionHeading" data-reveal>
-        {label && <p className="kicker">{label}</p>}
         {title && <h2>{title}</h2>}
       </div>
       {children}
@@ -74,12 +61,10 @@ export function Section({
 export function Picture({
   image,
   alt,
-  caption,
   wide = false,
 }: {
   image: string;
   alt: string;
-  caption?: string;
   wide?: boolean;
 }) {
   return (
@@ -96,7 +81,6 @@ export function Picture({
           data-parallax
         />
       </div>
-      {caption && <figcaption>{caption}</figcaption>}
     </figure>
   );
 }
@@ -123,9 +107,6 @@ export function ProjectCTA({
 }) {
   return (
     <section className="projectCTA">
-      <p className="kicker" data-reveal>
-        A CONVERSATION IS A BEGINNING.
-      </p>
       <h2 data-reveal>{title}</h2>
       <div className="ctaBottom">
         <p>{intro}</p>
@@ -153,12 +134,10 @@ export function SiteFooter() {
       </div>
       <div className="footerGrid">
         <div>
-          <p className="kicker">FIND US</p>
           <p>{contact.address}</p>
           <p>{contact.hours}</p>
         </div>
         <div>
-          <p className="kicker">EXPLORE</p>
           {[
             ["Studio", "/about"],
             ["Services", "/services"],
@@ -174,7 +153,6 @@ export function SiteFooter() {
           ))}
         </div>
         <div>
-          <p className="kicker">LET’S TALK</p>
           {contact.email && (
             <a href={`mailto:${contact.email}`}>{contact.email}</a>
           )}
@@ -191,7 +169,6 @@ export function SiteFooter() {
         </div>
         {(contact.instagram || contact.linkedin) && (
           <div>
-            <p className="kicker">FOLLOW</p>
             {contact.instagram && (
               <a
                 href={contact.instagram}

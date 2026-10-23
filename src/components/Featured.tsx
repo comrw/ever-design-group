@@ -52,7 +52,6 @@ export default function Featured() {
         className={styles.image}
       />
 
-      <p className={styles.eyebrow}>THE LAND SHAPES THE EXPERIENCE.</p>
       <h2 id="retreat-title" className={styles.title}>
         Stay somewhere
         <br />
@@ -95,8 +94,6 @@ export default function Featured() {
       >
         <span aria-hidden="true">+</span>
       </button>
-
-      <p className={styles.caption}>ILLUSTRATIVE ARCHITECTURAL CONCEPT</p>
     </section>
   );
 }

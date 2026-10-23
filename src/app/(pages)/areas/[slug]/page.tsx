@@ -34,14 +34,12 @@ export default async function Area({
   return (
     <>
       <PageHero
-        eyebrow="PLACES / RWANDA"
         title={a.name}
         intro={a.line}
         image={a.image}
-        caption={`${a.name} / RWANDA`}
       />
       <div id="page-content">
-        <Section label="THE CHARACTER OF A PLACE" title={a.line}>
+        <Section title={a.line}>
           <div className="splitCopy">
             <p className="largeCopy" data-reveal>
               {a.focus}
@@ -60,13 +58,12 @@ export default async function Area({
         </Section>
         {related.length > 0 && (
           <Section
-            label="CONNECTED TO THIS PLACE"
             title={`Our work in ${a.name}.`}
           >
             <ProjectCards items={related} />
           </Section>
         )}
-        <Section label="KEEP EXPLORING" title="Another landscape.">
+        <Section title="Another landscape.">
           {areas
             .filter((x) => x.slug !== slug)
             .map((x) => (

@@ -193,14 +193,8 @@ section[id] {
   gap: 40px;
   padding: 45px 0 65px;
 }
-.footerGrid .kicker {
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  margin-bottom: 22px;
-  color: var(--muted);
-}
 .footerGrid a,
-.footerGrid > div > p:not(.kicker) {
+.footerGrid > div > p {
   display: block;
   font-size: 13px;
   line-height: 1.7;

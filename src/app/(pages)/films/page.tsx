@@ -14,14 +14,12 @@ export default function Films() {
   return (
     <>
       <PageHero
-        eyebrow="FILMS & FIRSTHAND EXPERIENCES"
         title={"See a place\ncome alive."}
         intro="An impression on screen. A conversation on site. Get closer to the work and the landscapes behind it."
         image="projects/retreat-renders/cottage-hillside.webp"
-        caption="COTTAGE / ARCHITECTURAL VISUALISATION"
       />
       <div id="page-content">
-        <Section label="ON SCREEN" title="A moment on the hillside.">
+        <Section title="A moment on the hillside.">
           <div className="filmCard">
             <SourceFilm />
             <div data-reveal>
@@ -39,7 +37,7 @@ export default function Films() {
             </div>
           </div>
         </Section>
-        <Section label="BE THERE" title="Experience the work firsthand.">
+        <Section title="Experience the work firsthand.">
           <div className="splitCopy">
             <div className="bodyCopy" data-reveal>
               <p className="largeCopy">Visit in person.</p>

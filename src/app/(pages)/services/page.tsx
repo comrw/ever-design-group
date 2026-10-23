@@ -10,14 +10,12 @@ export default function Services() {
   return (
     <>
       <PageHero
-        eyebrow="WHAT WE DO"
         title={"From first idea\nto first guest."}
         intro="A connected team for the life of a destination. Find the land. Shape the architecture. Engineer the detail. Build the place."
         image="projects/construction/engineers-at-towers.webp"
-        caption="EVER DESIGN / ON SITE"
       />
       <div id="page-content">
-        <Section label="OUR CAPABILITIES" title="The work behind the place.">
+        <Section title="The work behind the place.">
           <div className="serviceRows">
             {services.map((s, i) => (
               <Link
@@ -39,11 +37,9 @@ export default function Services() {
         <Picture
           image="projects/team/design-team-at-work.webp"
           alt="Ever Design architects working together"
-          caption="IDEAS DEVELOP THROUGH COLLABORATION"
           wide
         />
         <Section
-          label="ONE CONNECTED TEAM"
           title="Designed with delivery in mind."
         >
           <div className="splitCopy">

@@ -8,14 +8,8 @@
   color: var(--white);
 }
 
-.eyebrow {
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1.45;
-}
-
 .title {
-  margin-top: calc(25.5 * var(--u));
+  margin-top: calc(25.5 * var(--u) + 14.5px);
   font-size: calc(30 * var(--u));
   font-weight: 400;
   line-height: 1.45;
@@ -110,14 +104,6 @@
   opacity: 1;
 }
 
-.note {
-  position: absolute;
-  top: calc(655 * var(--u));
-  left: var(--gutter);
-  font-size: 9px;
-  line-height: 1.45;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .previewImage,
   .name,
@@ -132,7 +118,7 @@
   }
 
   .title {
-    margin-top: calc(25.5 * var(--u));
+    margin-top: calc(25.5 * var(--u) + 14.5px);
     font-size: calc(46 * var(--u));
     line-height: 0.98;
     letter-spacing: -0.06em;
@@ -169,7 +155,4 @@
     height: calc(225 * var(--u));
   }
 
-  .note {
-    top: calc(740 * var(--u));
-  }
 }

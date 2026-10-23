@@ -10,14 +10,12 @@ export default function Developments() {
   return (
     <>
       <PageHero
-        eyebrow="OUR DEVELOPMENTS"
         title={"Places taking\nshape."}
         intro="From completed lakeside villas to ideas for a new destination. Every project starts with its own piece of Rwanda."
         image="projects/bp-ever-retreat/villa-night.webp"
-        caption="B&P EVER RETREAT VILLA / RUBAVU"
       />
       <div id="page-content">
-        <Section label="EXPERIENCE THE WORK" title="Completed showcases.">
+        <Section title="Completed showcases.">
           <ProjectCards
             items={projects.filter((p) => p.status === "Completed showcase")}
           />
@@ -26,7 +24,7 @@ export default function Developments() {
             arrange a visit.
           </p>
         </Section>
-        <Section label="LOOKING AHEAD" title="In design. In possibility.">
+        <Section title="In design. In possibility.">
           <ProjectCards
             items={projects.filter((p) => p.status !== "Completed showcase")}
           />

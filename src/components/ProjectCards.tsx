@@ -23,10 +23,6 @@ export default function ProjectCards({
               sizes="(max-width:480px) 90vw, 45vw"
             />
           </div>
-          <div className="cardMeta">
-            <span>{p.place}</span>
-            <span>{p.status}</span>
-          </div>
           <h3>
             {p.title}
             <span className="cardArrow" aria-hidden>

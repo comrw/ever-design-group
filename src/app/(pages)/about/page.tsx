@@ -16,15 +16,12 @@ export default function About() {
   return (
     <>
       <PageHero
-        eyebrow="THE STUDIO / KIGALI, RWANDA"
         title={"Ideas into\ninfrastructure."}
         intro="Planners. Architects. Engineers. Builders. One team, connected by a belief that a place should belong to its landscape."
         image="projects/team/site-planning.webp"
-        caption="EVER DESIGN / PLANNING IN THE FIELD"
       />
       <div id="page-content">
         <Section
-          label="OUR REASON FOR BUILDING"
           title={"A place is more\nthan a location."}
         >
           <div className="splitCopy">
@@ -57,11 +54,9 @@ export default function About() {
         <Picture
           image="projects/construction/engineers-at-towers.webp"
           alt="Ever Design team at a construction site"
-          caption="FROM THE DRAWING TO THE SITE"
           wide
         />
         <Section
-          label="OUR DISCIPLINES"
           title="Different minds. One direction."
         >
           <div className="splitCopy">
@@ -79,7 +74,7 @@ export default function About() {
           </div>
         </Section>
         {team.length > 0 && (
-          <Section label="THE PEOPLE" title="Behind every place.">
+          <Section title="Behind every place.">
             <div className="teamGrid">
               {team.map(([name, role, image]) => (
                 <article className="teamCard" key={name} data-reveal>
@@ -98,12 +93,11 @@ export default function About() {
             </div>
           </Section>
         )}
-        <Section label="CULTURE IN BUILT FORM" title="An architectural story.">
+        <Section title="An architectural story.">
           <div className="splitCopy">
             <Picture
               image="projects/museum/museum-exterior.webp"
               alt="Ever Design Museum in Kimihurura"
-              caption="EVER DESIGN MUSEUM / ARCHITECTURAL VISUALISATION"
             />
             <div className="bodyCopy" data-reveal>
               <p>

@@ -16,14 +16,12 @@ export default async function Contact({
   return (
     <>
       <PageHero
-        eyebrow="A DESTINATION BEGINS WITH A CONVERSATION"
         title={"What are you\nimagining?"}
         intro="Tell us about your land, your location or your idea. Let’s explore what it can become."
         image="projects/team/office-planning.webp"
-        caption="EVER DESIGN / KIGALI"
       />
       <div id="page-content">
-        <Section label="REACH THE TEAM" title="Let’s talk.">
+        <Section title="Let’s talk.">
           <div className="contactDetails">
             {contact.whatsapp && (
               <div data-reveal>
