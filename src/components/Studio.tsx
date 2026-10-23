@@ -11,7 +11,6 @@ const STAGES = [
 export default function Studio() {
   return (
     <section id="studio" className={styles.section} aria-labelledby="studio-title">
-      <p className={styles.eyebrow}>EVER DESIGN GROUP / KIGALI, RWANDA</p>
       <div className={styles.intro}>
         <h2 id="studio-title" className={styles.title}>
           Ideas into

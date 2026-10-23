@@ -34,14 +34,12 @@ export default async function ProjectPage({
   return (
     <>
       <PageHero
-        eyebrow={`${p.place} / ${p.status}`}
         title={p.title}
         intro={p.intro}
         image={p.image}
-        caption={p.label}
       />
       <div id="page-content">
-        <Section label="THE PLACE. THE PROJECT." title={p.intro}>
+        <Section title={p.intro}>
           <div className="splitCopy">
             <p className="largeCopy" data-reveal>
               {p.availability}
@@ -69,33 +67,27 @@ export default async function ProjectPage({
         <Picture
           image={p.gallery[0]}
           alt={`${p.title}: ${p.gallery[0].startsWith("rwanda/") ? "the surrounding landscape" : "project view"}`}
-          caption={
-            p.gallery[0].startsWith("rwanda/")
-              ? "THE SURROUNDING LANDSCAPE"
-              : p.label
-          }
           wide
         />
         {p.gallery.length > 1 && (
-          <Section label="ANOTHER PERSPECTIVE" title="A closer look.">
+          <Section title="A closer look.">
             <div className="galleryGrid">
               {p.gallery.slice(1).map((im) => (
                 <Picture
                   key={im}
                   image={im}
                   alt={`${p.title}, additional view`}
-                  caption={p.label}
                 />
               ))}
             </div>
           </Section>
         )}
-        <Section label="THE SETTING" title="Understand the place.">
+        <Section title="Understand the place.">
           <TextLink href={`/areas/${p.area}`}>
             Explore {p.place.split(" / ")[0]}
           </TextLink>
         </Section>
-        <Section label="MORE TO DISCOVER" title="Other places. Other stories.">
+        <Section title="Other places. Other stories.">
           <ProjectCards
             items={projects.filter((x) => x.slug !== p.slug).slice(0, 2)}
           />

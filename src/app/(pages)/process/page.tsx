@@ -46,14 +46,12 @@ export default function Process() {
   return (
     <>
       <PageHero
-        eyebrow="HOW WE WORK"
         title={"A clear line\nfrom idea\nto place."}
         intro="Plan. Design. Engineer. Build. Connected disciplines, carrying the intention of a project through every stage."
         image="projects/construction/site-excavation.webp"
-        caption="EVER DESIGN / SITE PREPARATION"
       />
       <div id="page-content">
-        <Section label="THE PROCESS" title="Intent meets action.">
+        <Section title="Intent meets action.">
           <ol className="steps">
             {steps.map(([n, h, t, href], i) => (
               <li className="step" key={n} data-reveal>
@@ -71,10 +69,9 @@ export default function Process() {
         <Picture
           image="projects/construction/scaffold-inspection.webp"
           alt="Engineers reviewing work at a construction site"
-          caption="THE DETAIL MATTERS / EVER DESIGN"
           wide
         />
-        <Section label="NEAR OR FAR" title="Stay connected to the work.">
+        <Section title="Stay connected to the work.">
           <div className="splitCopy">
             <p className="largeCopy" data-reveal>
               A project in Rwanda. A conversation wherever you are.

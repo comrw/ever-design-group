@@ -61,8 +61,6 @@ export default function Hero() {
 
       <SiteHeader />
 
-      <p className={styles.tagline}>HOSPITALITY. ROOTED IN PLACE.</p>
-
       <div className={styles.strip}>
         <p className={styles.stripTitle}>Plan. Design. Build.</p>
         <p className={styles.stripText}>
@@ -70,9 +68,7 @@ export default function Hero() {
           <br />
           that tell the African story.
         </p>
-        <p className={styles.stripPlace}>Kigali, Rwanda</p>
-        <p className={styles.stripNote}>ILLUSTRATIVE CONCEPT</p>
-      </div>
+        <p className={styles.stripPlace}>Kigali, Rwanda</p>      </div>
     </section>
   );
 }

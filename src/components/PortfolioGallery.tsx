@@ -20,11 +20,11 @@ export default function PortfolioGallery() {
           </button>
         ))}
       </div>
-      <p className="filterCount" role="status">
+      <p className="sr-only" role="status">
         {items.length} {items.length === 1 ? "perspective" : "perspectives"}
       </p>
       <div className="projectGrid">
-        {items.map(([n, im, category, href]) => (
+        {items.map(([n, im, , href]) => (
           <Link key={n} href={href} className="projectCard">
             <div className="cardImage">
               <Image
@@ -33,10 +33,6 @@ export default function PortfolioGallery() {
                 fill
                 sizes="(max-width:480px) 90vw, 45vw"
               />
-            </div>
-            <div className="cardMeta">
-              <span>{category}</span>
-              <span>Ever Design</span>
             </div>
             <h3>
               {n}

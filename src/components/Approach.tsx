@@ -10,7 +10,6 @@ import lake from "../../public/images/retreat-above-lake.png";
 
 type Card = {
   title: string;
-  tag: string;
   image: StaticImageData;
   alt: string;
   className: string;
@@ -19,21 +18,18 @@ type Card = {
 const CARDS: Card[] = [
   {
     title: "The courtyard pavilion",
-    tag: "HOSPITALITY / ILLUSTRATIVE CONCEPT",
     image: courtyard,
     alt: "Illustrative concept of a low timber pavilion opening onto a lawn",
     className: styles.card1,
   },
   {
     title: "A walk into the landscape",
-    tag: "ECO-PARK / ILLUSTRATIVE CONCEPT",
     image: walk,
     alt: "Illustrative concept of a timber boardwalk and open shelter in a forest",
     className: styles.card2,
   },
   {
     title: "A retreat above the lake",
-    tag: "RETREAT / ILLUSTRATIVE CONCEPT",
     image: lake,
     alt: "Illustrative concept of a glazed stone retreat on terraced land above a lake at sunset",
     className: styles.card3,
@@ -68,7 +64,6 @@ export default function Approach() {
   return (
     <section ref={sectionRef} id="approach" className={styles.section} aria-labelledby="approach-title">
       <div className={styles.copy}>
-        <p className={styles.eyebrow}>A PLACE BEFORE A PROJECT.</p>
         <h2 id="approach-title" className={styles.headline}>
           Hotels.
           <br />
@@ -108,7 +103,6 @@ export default function Approach() {
                 </div>
                 <figcaption>
                   <span className={styles.cardTitle}>{card.title}</span>
-                  <span className={styles.cardTag}>{card.tag}</span>
                 </figcaption>
               </figure>
             </div>

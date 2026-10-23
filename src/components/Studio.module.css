@@ -6,15 +6,8 @@
   color: var(--ink);
 }
 
-.eyebrow {
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1.45;
-}
-
 .title {
-  margin-top: calc(34.5 * var(--u));
+  margin-top: calc(34.5 * var(--u) + 14.5px);
   font-size: calc(44 * var(--u));
   font-weight: 400;
   line-height: 0.98;
@@ -98,7 +91,7 @@
     display: grid;
     grid-template-columns: calc(852 * var(--u)) calc(480 * var(--u));
     align-items: start;
-    margin-top: calc(34.5 * var(--u));
+    margin-top: calc(34.5 * var(--u) + 14.5px);
   }
 
   .title {

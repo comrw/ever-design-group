@@ -7,13 +7,8 @@
   color: var(--white);
 }
 
-.eyebrow {
-  font-size: 10px;
-  line-height: 1.45;
-}
-
 .title {
-  margin-top: calc(39.5 * var(--u));
+  margin-top: calc(39.5 * var(--u) + 14.5px);
   font-size: calc(49 * var(--u));
   font-weight: 400;
   line-height: 0.98;
@@ -124,7 +119,7 @@
   }
 
   .title {
-    margin-top: calc(39.5 * var(--u));
+    margin-top: calc(39.5 * var(--u) + 14.5px);
     font-size: calc(95 * var(--u));
   }
 

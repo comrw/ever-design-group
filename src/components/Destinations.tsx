@@ -87,7 +87,6 @@ export default function Destinations() {
 
   return (
     <section id="destinations" className={styles.section} aria-labelledby="destinations-title">
-      <p className={styles.eyebrow}>WHAT WE CREATE</p>
       <h2 id="destinations-title" className={styles.title}>
         Places with a story.
       </h2>
@@ -144,8 +143,6 @@ export default function Destinations() {
           </div>
         </div>
       </div>
-
-      <p className={styles.note}>ILLUSTRATIVE CONCEPT EXPLORATIONS</p>
     </section>
   );
 }

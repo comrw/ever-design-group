@@ -7,15 +7,8 @@
   color: var(--ink);
 }
 
-.eyebrow {
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1.45;
-}
-
 .headline {
-  margin-top: calc(41.5 * var(--u));
+  margin-top: calc(41.5 * var(--u) + 14.5px);
   font-size: calc(58 * var(--u));
   font-weight: 400;
   line-height: 0.98;
@@ -80,11 +73,15 @@
   object-fit: cover;
 }
 
+/* Title centred in the white strip below the image. */
 .card figcaption {
   position: absolute;
-  top: calc((var(--img) + 9) * var(--u));
+  top: calc(var(--img) * var(--u));
+  bottom: 0;
   left: calc(20 * var(--u));
   right: calc(20 * var(--u));
+  display: flex;
+  align-items: center;
   line-height: 1.45;
 }
 
@@ -92,13 +89,6 @@
   display: block;
   font-size: calc(19 * var(--u));
   font-weight: 500;
-}
-
-.cardTag {
-  display: block;
-  margin-top: calc(5 * var(--u));
-  color: var(--muted);
-  font-size: 10px;
 }
 
 /* Mobile slots (relative to the stack, which starts at y = 556). */
@@ -168,10 +158,6 @@
 
   .cardTitle {
     font-size: calc(23 * var(--u));
-  }
-
-  .cardTag {
-    margin-top: calc(0 * var(--u));
   }
 
   .card1 {

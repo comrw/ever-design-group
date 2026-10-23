@@ -73,16 +73,6 @@
   }
 }
 
-.tagline {
-  position: absolute;
-  z-index: 3;
-  top: calc(112 * var(--u));
-  left: var(--gutter);
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1.45;
-}
-
 .strip {
   position: absolute;
   z-index: 3;
@@ -117,12 +107,6 @@
   font-size: 11px;
 }
 
-.stripNote {
-  top: calc(113 * var(--u));
-  left: calc(222 * var(--u));
-  font-size: 9px;
-}
-
 @media (min-width: 1024px) {
   .hero {
     --hero-h: calc(806 * var(--u));
@@ -136,11 +120,6 @@
 
   .ever {
     font-size: calc(440 * var(--u));
-  }
-
-  .tagline {
-    top: calc(138 * var(--u));
-    font-size: 11px;
   }
 
   .strip {
@@ -162,8 +141,4 @@
     top: calc(84 * var(--u));
   }
 
-  .stripNote {
-    top: calc(84 * var(--u));
-    left: calc(1170 * var(--u));
-  }
 }

@@ -11,15 +11,12 @@ export default function Areas() {
   return (
     <>
       <PageHero
-        eyebrow="ROOTED IN RWANDA"
         title={"Every place\nhas a story."}
         intro="Water. Forest. Mountains. City. The character of the land comes before the architecture."
         image="rwanda/lake-kivu.webp"
-        caption="LAKE KIVU / RWANDA"
       />
       <div id="page-content">
         <Section
-          label="UNDERSTAND THE SETTING"
           title="Six different beginnings."
         >
           <div className="projectGrid">
@@ -37,10 +34,6 @@ export default function Areas() {
                     fill
                     sizes="(max-width:480px) 90vw, 45vw"
                   />
-                </div>
-                <div className="cardMeta">
-                  <span>{a.focus}</span>
-                  <span>Rwanda</span>
                 </div>
                 <h3>
                   {a.name}

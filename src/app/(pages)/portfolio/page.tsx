@@ -9,14 +9,12 @@ export default function Portfolio() {
   return (
     <>
       <PageHero
-        eyebrow="SELECTED PERSPECTIVES"
         title={"The idea.\nThe making.\nThe place."}
         intro="Architecture seen from different sides: completed work, design studies and the hands that bring it together."
         image="projects/bp-ever-retreat/glass-pavilion-night.webp"
-        caption="B&P EVER RETREAT VILLA / GLASS PAVILION"
       />
       <div id="page-content">
-        <Section label="THE PORTFOLIO" title="Work, in perspective.">
+        <Section title="Work, in perspective.">
           <PortfolioGallery />
         </Section>
         <ProjectCTA />

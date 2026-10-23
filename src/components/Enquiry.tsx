@@ -142,9 +142,6 @@ export default function Enquiry({
       aria-labelledby="enquiry-title"
     >
       <div className={styles.copy}>
-        <p className={styles.eyebrow}>
-          A DESTINATION BEGINS WITH A CONVERSATION.
-        </p>
         <h2 id="enquiry-title" className={styles.title}>
           What are
           <br />

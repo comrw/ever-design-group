@@ -46,7 +46,6 @@ export default function Film() {
   return (
     <section id="film" className={styles.section} aria-labelledby="film-title">
       <div className={styles.copy}>
-        <p className={styles.eyebrow}>INSIDE THE WORK</p>
         <h2 id="film-title" className={styles.title}>
           From first line
           <br />
@@ -115,10 +114,6 @@ export default function Film() {
             </>
           )}
         </div>
-        <figcaption className={styles.caption}>
-          ILLUSTRATIVE POSTER / VIDEO SPACE
-          {!hasFilm ? <span className={styles.status}> · FILM COMING SOON</span> : null}
-        </figcaption>
         {state === "error" ? (
           <p className={styles.error} role="alert">
             The film could not be loaded. Please try again later.

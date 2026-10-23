@@ -16,14 +16,8 @@
   object-position: 60.36% 50%;
 }
 
-.eyebrow {
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1.45;
-}
-
 .title {
-  margin-top: calc(31.5 * var(--u));
+  margin-top: calc(31.5 * var(--u) + 14.5px);
   font-size: calc(38 * var(--u));
   font-weight: 500;
   line-height: 1.45;
@@ -101,14 +95,6 @@
   outline-color: var(--white);
 }
 
-.caption {
-  position: absolute;
-  top: calc(676 * var(--u));
-  left: var(--gutter);
-  font-size: 9px;
-  line-height: 1.45;
-}
-
 @media (min-width: 1024px) {
   .section {
     height: calc(806 * var(--u));
@@ -119,7 +105,7 @@
   }
 
   .title {
-    margin-top: calc(71.5 * var(--u));
+    margin-top: calc(71.5 * var(--u) + 14.5px);
     font-size: calc(80 * var(--u));
     line-height: 0.98;
     letter-spacing: -0.06em;
@@ -157,7 +143,4 @@
     left: calc(1050 * var(--u));
   }
 
-  .caption {
-    top: calc(774 * var(--u));
-  }
 }

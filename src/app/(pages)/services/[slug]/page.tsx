@@ -32,14 +32,12 @@ export default async function ServicePage({
   return (
     <>
       <PageHero
-        eyebrow="OUR SERVICES"
         title={s.title}
         intro={s.intro}
         image={s.image}
-        caption={s.label}
       />
       <div id="page-content">
-        <Section label="THE APPROACH" title={s.verb}>
+        <Section title={s.verb}>
           <div className="splitCopy">
             <p className="largeCopy" data-reveal>
               {s.intro}
@@ -51,7 +49,6 @@ export default async function ServicePage({
           </div>
         </Section>
         <Section
-          label="FROM INTENTION TO DELIVERY"
           title="How it comes together."
         >
           <ol className="steps">
@@ -64,7 +61,7 @@ export default async function ServicePage({
             ))}
           </ol>
         </Section>
-        <Section label="CONNECTED CAPABILITIES" title="Keep exploring.">
+        <Section title="Keep exploring.">
           <div className="serviceRows">
             {services
               .filter((x) => x.slug !== slug)

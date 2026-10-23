@@ -70,9 +70,6 @@ export default function SourceFilm() {
           </p>
         )}
       </div>
-      <p className="filmCredit">
-        COTTAGE HILLSIDE / ARCHITECTURAL ANIMATION · 14 SECONDS
-      </p>
     </div>
   );
 }

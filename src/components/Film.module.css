@@ -6,15 +6,8 @@
   color: var(--ink);
 }
 
-.eyebrow {
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1.45;
-}
-
 .title {
-  margin-top: calc(23.5 * var(--u));
+  margin-top: calc(23.5 * var(--u) + 14.5px);
   font-size: calc(36 * var(--u));
   font-weight: 400;
   line-height: 1.05;
@@ -99,17 +92,6 @@ button.play:focus-visible {
   cursor: default;
 }
 
-.caption {
-  margin-top: calc(18 * var(--u));
-  color: var(--muted);
-  font-size: 9px;
-  line-height: 1.45;
-}
-
-.status {
-  color: var(--ink);
-}
-
 .error {
   margin-top: 8px;
   color: #a34f00;
@@ -137,7 +119,7 @@ button.play:focus-visible {
   }
 
   .title {
-    margin-top: calc(48.5 * var(--u));
+    margin-top: calc(48.5 * var(--u) + 14.5px);
     font-size: calc(54 * var(--u));
   }
 
@@ -163,7 +145,4 @@ button.play:focus-visible {
     display: block;
   }
 
-  .caption {
-    margin-top: calc(18 * var(--u));
-  }
 }
