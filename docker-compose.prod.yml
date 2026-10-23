@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_ENQUIRY_ENDPOINT: ${NEXT_PUBLIC_ENQUIRY_ENDPOINT:-}
+        NEXT_PUBLIC_FILM_SRC: ${NEXT_PUBLIC_FILM_SRC:-}
+        NEXT_PUBLIC_FILM_TYPE: ${NEXT_PUBLIC_FILM_TYPE:-}
+        NEXT_PUBLIC_FILM_CAPTIONS_SRC: ${NEXT_PUBLIC_FILM_CAPTIONS_SRC:-}
+        NEXT_PUBLIC_FILM_CAPTIONS_LANG: ${NEXT_PUBLIC_FILM_CAPTIONS_LANG:-en}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
+    expose:
+      - "3000"
