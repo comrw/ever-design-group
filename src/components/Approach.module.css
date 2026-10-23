@@ -1,0 +1,203 @@
+/* Figma: mobile 390 x 1110, desktop 1440 x 850. */
+
+.section {
+  position: relative;
+  padding: calc(48 * var(--u)) var(--gutter) 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.eyebrow {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.headline {
+  margin-top: calc(41.5 * var(--u));
+  font-size: calc(58 * var(--u));
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+}
+
+.subhead {
+  margin-top: calc(43.7 * var(--u));
+  font-size: calc(22 * var(--u));
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.body {
+  margin-top: calc(8 * var(--u));
+  max-width: 342px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* Stack: card centres and rotations measured from the Figma frames. */
+.stack {
+  position: relative;
+  height: calc(554 * var(--u));
+  margin: calc(48 * var(--u)) calc(-1 * var(--gutter)) 0;
+}
+
+.slot {
+  position: absolute;
+  left: calc(var(--x) * var(--u));
+  top: calc(var(--y) * var(--u));
+  width: calc(var(--w) * var(--u));
+  height: calc(var(--h) * var(--u));
+}
+
+.motion {
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--white);
+  transform: rotate(var(--r));
+  box-shadow: 0 1px 0 rgb(16 17 16 / 0.02);
+}
+
+.media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(var(--img) * var(--u));
+}
+
+.image {
+  object-fit: cover;
+}
+
+.card figcaption {
+  position: absolute;
+  top: calc((var(--img) + 9) * var(--u));
+  left: calc(20 * var(--u));
+  right: calc(20 * var(--u));
+  line-height: 1.45;
+}
+
+.cardTitle {
+  display: block;
+  font-size: calc(19 * var(--u));
+  font-weight: 500;
+}
+
+.cardTag {
+  display: block;
+  margin-top: calc(5 * var(--u));
+  color: var(--muted);
+  font-size: 10px;
+}
+
+/* Mobile slots (relative to the stack, which starts at y = 556). */
+.card1 {
+  --x: 33.9;
+  --y: 16.6;
+  --w: 320;
+  --h: 245;
+  --img: 173;
+  --r: -6deg;
+}
+
+.card2 {
+  --x: 51.6;
+  --y: 194.5;
+  --w: 310;
+  --h: 240;
+  --img: 168;
+  --r: 6deg;
+}
+
+.card3 {
+  --x: 29.7;
+  --y: 305.5;
+  --w: 320;
+  --h: 225;
+  --img: 153;
+  --r: -3deg;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    height: calc(850 * var(--u));
+  }
+
+  .copy {
+    width: calc(650 * var(--u));
+  }
+
+  .headline {
+    font-size: calc(100 * var(--u));
+  }
+
+  .subhead {
+    margin-top: calc(74 * var(--u));
+    font-size: calc(30 * var(--u));
+  }
+
+  .body {
+    margin-top: calc(13 * var(--u));
+    max-width: calc(500 * var(--u));
+    min-width: 340px;
+    font-size: 16px;
+  }
+
+  .stack {
+    position: absolute;
+    inset: 0;
+    height: auto;
+    margin: 0;
+    pointer-events: none;
+  }
+
+  .slot {
+    pointer-events: auto;
+  }
+
+  .cardTitle {
+    font-size: calc(23 * var(--u));
+  }
+
+  .cardTag {
+    margin-top: calc(0 * var(--u));
+  }
+
+  .card1 {
+    --x: 773.6;
+    --y: 67.1;
+    --w: 590;
+    --h: 380;
+    --img: 308;
+    --r: -8deg;
+  }
+
+  .card2 {
+    --x: 821.7;
+    --y: 345.7;
+    --w: 525;
+    --h: 350;
+    --img: 278;
+    --r: 7deg;
+  }
+
+  .card3 {
+    --x: 703.5;
+    --y: 469.9;
+    --w: 560;
+    --h: 335;
+    --img: 263;
+    --r: -5deg;
+  }
+}

@@ -1,0 +1,29 @@
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.main > * {
+  order: 0;
+}
+
+/* Mobile frame order: Featured → Studio → Film → Enquiry. */
+.studio {
+  order: 1;
+}
+
+.film {
+  order: 2;
+}
+
+.main > section:last-child {
+  order: 3;
+}
+
+@media (min-width: 1024px) {
+  .studio,
+  .film,
+  .main > section:last-child {
+    order: 0;
+  }
+}

@@ -1,0 +1,175 @@
+/* Figma: mobile 390 x 690, desktop 1440 x 780. */
+
+.section {
+  position: relative;
+  height: calc(690 * var(--u));
+  padding: calc(44 * var(--u)) var(--gutter) 0;
+  background: var(--black);
+  color: var(--white);
+}
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.title {
+  margin-top: calc(25.5 * var(--u));
+  font-size: calc(30 * var(--u));
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+/* The index spans from the first rule to the bottom of the section. */
+.index {
+  position: absolute;
+  top: calc(178 * var(--u));
+  right: var(--gutter);
+  bottom: 0;
+  left: var(--gutter);
+}
+
+.row {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: calc(81 * var(--u));
+  border-top: 1px solid rgb(255 255 255 / 0.25);
+  color: var(--white);
+  text-align: left;
+}
+
+.number {
+  position: absolute;
+  top: calc(25 * var(--u));
+  left: 0;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.name {
+  position: absolute;
+  top: calc(14 * var(--u));
+  left: calc(34 * var(--u));
+  font-size: calc(30 * var(--u));
+  line-height: 1.45;
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+
+.arrow {
+  position: absolute;
+  top: calc(22 * var(--u));
+  right: calc(-9 * var(--u));
+  width: calc(44 * var(--u));
+  font-size: calc(22 * var(--u));
+  line-height: 1.45;
+  transition: transform 0.25s ease;
+}
+
+.row[aria-pressed="true"] .name {
+  color: var(--orange);
+}
+
+.row:hover .arrow,
+.row:focus-visible .arrow {
+  transform: translateX(4px);
+}
+
+.row:focus-visible {
+  outline-offset: -2px;
+}
+
+/* Preview: a fixed card below the list on mobile (Figma 23:243). */
+.preview {
+  position: absolute;
+  top: calc(376.6 * var(--u));
+  left: calc(157.4 * var(--u));
+  width: calc(175 * var(--u));
+  height: calc(111 * var(--u));
+  pointer-events: none;
+  will-change: transform;
+}
+
+.previewFrame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transform: rotate(8deg);
+}
+
+.previewImage {
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.previewImage[data-active="true"] {
+  opacity: 1;
+}
+
+.note {
+  position: absolute;
+  top: calc(655 * var(--u));
+  left: var(--gutter);
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .previewImage,
+  .name,
+  .arrow {
+    transition: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    height: calc(780 * var(--u));
+  }
+
+  .title {
+    margin-top: calc(25.5 * var(--u));
+    font-size: calc(46 * var(--u));
+    line-height: 0.98;
+    letter-spacing: -0.06em;
+  }
+
+  .index {
+    top: calc(200 * var(--u));
+  }
+
+  .row {
+    height: calc(123 * var(--u));
+  }
+
+  .name {
+    left: 50%;
+    top: calc(14 * var(--u));
+    transform: translateX(-50%);
+    font-size: calc(74 * var(--u));
+    line-height: 0.98;
+    letter-spacing: -0.06em;
+  }
+
+  .arrow {
+    top: calc(22 * var(--u));
+    right: calc(-9 * var(--u));
+    font-size: calc(30 * var(--u));
+  }
+
+  /* Resting position from the Figma frame (23:155). */
+  .preview {
+    top: calc(160.3 * var(--u));
+    left: calc(849.6 * var(--u));
+    width: calc(350 * var(--u));
+    height: calc(225 * var(--u));
+  }
+
+  .note {
+    top: calc(740 * var(--u));
+  }
+}

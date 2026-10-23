@@ -1,0 +1,169 @@
+/*
+ * Figma: mobile 390 x 740 (image 1322 x 740, centred), desktop 1440 x 806.
+ * Background and foreground share one "stage" box with the image's aspect
+ * ratio, so the roofline crop always lines up with the lettering.
+ */
+
+.hero {
+  --hero-h: calc(740 * var(--u));
+  --roofline: 52.973%; /* 392 / 740 */
+
+  position: relative;
+  height: var(--hero-h);
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--white);
+  isolation: isolate;
+}
+
+.stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100%, calc(var(--hero-h) * 1344 / 752));
+  aspect-ratio: 1344 / 752;
+  transform: translate(-50%, -50%);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.foreground {
+  z-index: 2;
+  clip-path: inset(var(--roofline) 0 0 0);
+}
+
+/* "ever" — live text, sits between background and foreground. */
+.title {
+  position: absolute;
+  z-index: 1;
+  top: calc(230 * var(--u));
+  left: calc(12 * var(--u));
+  margin: 0;
+  font-weight: 500;
+}
+
+.everScroll {
+  display: block;
+  will-change: transform;
+}
+
+.ever {
+  display: block;
+  font-size: calc(200 * var(--u));
+  line-height: 0.98;
+  letter-spacing: -0.09em;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ever {
+    animation: rise 1.6s var(--ease-out) 0.15s both;
+  }
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(76.6%); /* 330 / 431, from the Figma timeline */
+  }
+  to {
+    transform: none;
+  }
+}
+
+.tagline {
+  position: absolute;
+  z-index: 3;
+  top: calc(112 * var(--u));
+  left: var(--gutter);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.strip {
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: calc(140 * var(--u));
+  background: rgb(16 46 43 / 0.96);
+}
+
+.strip > p {
+  position: absolute;
+  line-height: 1.45;
+}
+
+.stripTitle {
+  top: calc(20 * var(--u));
+  left: var(--gutter);
+  font-size: calc(20 * var(--u));
+  font-weight: 500;
+}
+
+.stripText {
+  top: calc(57 * var(--u));
+  left: var(--gutter);
+  font-size: 13px;
+}
+
+.stripPlace {
+  top: calc(111 * var(--u));
+  left: var(--gutter);
+  font-size: 11px;
+}
+
+.stripNote {
+  top: calc(113 * var(--u));
+  left: calc(222 * var(--u));
+  font-size: 9px;
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    --hero-h: calc(806 * var(--u));
+    --roofline: 54.094%; /* 436 / 806 */
+  }
+
+  .title {
+    top: calc(93 * var(--u));
+    left: calc(186 * var(--u));
+  }
+
+  .ever {
+    font-size: calc(440 * var(--u));
+  }
+
+  .tagline {
+    top: calc(138 * var(--u));
+    font-size: 11px;
+  }
+
+  .strip {
+    height: calc(120 * var(--u));
+  }
+
+  .stripTitle {
+    top: calc(20 * var(--u));
+    font-size: calc(28 * var(--u));
+  }
+
+  .stripText {
+    top: calc(24 * var(--u));
+    left: calc(720 * var(--u));
+    font-size: 16px;
+  }
+
+  .stripPlace {
+    top: calc(84 * var(--u));
+  }
+
+  .stripNote {
+    top: calc(84 * var(--u));
+    left: calc(1170 * var(--u));
+  }
+}
