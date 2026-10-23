@@ -227,16 +227,6 @@ export default function Enquiry({
         </div>
       </form>
 
-      <footer className={styles.footer}>
-        <p className={styles.footerName}>EVER DESIGN GROUP</p>
-        <p className={styles.footerPlace}>
-          {contact.email ? (
-            <a href={`mailto:${contact.email}`}>{contact.email}</a>
-          ) : (
-            "Kigali, Rwanda"
-          )}
-        </p>
-      </footer>
     </section>
   );
 }

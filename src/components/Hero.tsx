@@ -68,7 +68,7 @@ export default function Hero() {
           <br />
           that tell the African story.
         </p>
-        <p className={styles.stripPlace}>Kigali, Rwanda</p>      </div>
+      </div>
     </section>
   );
 }

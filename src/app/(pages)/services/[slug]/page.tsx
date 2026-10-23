@@ -52,9 +52,8 @@ export default async function ServicePage({
           title="How it comes together."
         >
           <ol className="steps">
-            {s.steps.map(([n, t], i) => (
+            {s.steps.map(([n, t]) => (
               <li className="step" key={n} data-reveal>
-                <span className="stepNum">0{i + 1}</span>
                 <h3>{n}</h3>
                 <p>{t}</p>
               </li>

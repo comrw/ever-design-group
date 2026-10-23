@@ -34,13 +34,6 @@
   text-align: left;
 }
 
-.number {
-  position: absolute;
-  top: calc(25 * var(--u));
-  left: 0;
-  font-size: 10px;
-  line-height: 1.45;
-}
 
 .name {
   position: absolute;

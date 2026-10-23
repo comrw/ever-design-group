@@ -46,12 +46,6 @@
   line-height: 1.5;
   max-width: 590px;
 }
-.heroScroll {
-  position: absolute;
-  right: var(--page-gutter);
-  bottom: 26px;
-  font-size: 13px;
-}
 .editorialSection {
   padding: 110px var(--page-gutter);
 }
@@ -201,7 +195,7 @@
 }
 .serviceRow {
   display: grid;
-  grid-template-columns: 50px 1fr 1fr 30px;
+  grid-template-columns: 1fr 1fr 30px;
   align-items: baseline;
   gap: 30px;
   padding: 38px 0;
@@ -224,10 +218,6 @@
   line-height: 1.6;
   max-width: 400px;
 }
-.serviceRow .rowNum {
-  font-size: 11px;
-  color: var(--muted);
-}
 .serviceRow .rowArrow {
   font-size: 30px;
 }
@@ -236,14 +226,10 @@
 }
 .step {
   display: grid;
-  grid-template-columns: 80px 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 30px;
   padding: 35px 0;
   border-top: 1px solid #ccc;
-}
-.stepNum {
-  color: var(--orange);
-  font-size: 12px;
 }
 .step h3 {
   font-size: clamp(24px, 3vw, 40px);
@@ -266,7 +252,7 @@
   border-top: 1px solid #c4c5bc;
 }
 .facts dt {
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
@@ -340,7 +326,7 @@
   gap: 50px;
 }
 .contactDetails h3 {
-  font-size: 12px;
+  font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 16px;
@@ -479,28 +465,28 @@
     font-size: 27px;
   }
   .cardDescription {
-    font-size: 12px;
+    font-size: 13px;
   }
   .serviceRow {
-    grid-template-columns: 28px 1fr 20px;
+    grid-template-columns: 1fr 20px;
     gap: 15px;
     padding: 28px 0;
   }
   .serviceRow p {
-    grid-column: 2;
+    grid-column: 1;
     grid-row: 2;
     font-size: 14px;
   }
   .serviceRow .rowArrow {
-    grid-column: 3;
+    grid-column: 2;
     grid-row: 1;
   }
   .step {
-    grid-template-columns: 32px 1fr;
+    grid-template-columns: 1fr;
     gap: 18px;
   }
   .step p {
-    grid-column: 2;
+    grid-column: 1;
     font-size: 15px;
   }
   .facts {
@@ -554,9 +540,6 @@
   }
   .pageHero h1 {
     font-size: 57px;
-  }
-  .heroScroll {
-    font-size: 12px;
   }
   .teamGrid .portrait {
     aspect-ratio: 3/4;

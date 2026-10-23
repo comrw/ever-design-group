@@ -53,9 +53,8 @@ export default function Process() {
       <div id="page-content">
         <Section title="Intent meets action.">
           <ol className="steps">
-            {steps.map(([n, h, t, href], i) => (
+            {steps.map(([n, h, t, href]) => (
               <li className="step" key={n} data-reveal>
-                <span className="stepNum">0{i + 1}</span>
                 <h3>{n}</h3>
                 <div>
                   <p>{h}</p>

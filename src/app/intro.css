@@ -210,7 +210,7 @@ html[data-intro-state="exit"] .il-canopy {
   min-height: 24px;
   padding: 10px 12px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.02em;
   text-decoration: underline;

@@ -25,9 +25,8 @@ export default function Studio() {
       <p className={styles.disciplines}>Planners. Architects. Engineers. Builders.</p>
 
       <ol className={styles.stages} aria-label="Development stages">
-        {STAGES.map((stage, index) => (
+        {STAGES.map((stage) => (
           <li key={stage.name} className={styles.stage}>
-            <span className={styles.stageNumber}>{String(index + 1).padStart(2, "0")}</span>
             <h3 className={styles.stageName}>{stage.name}</h3>
             <p className={styles.stageText}>
               {stage.text[0]}

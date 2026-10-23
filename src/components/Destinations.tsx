@@ -111,7 +111,6 @@ export default function Destinations() {
                   if (event.pointerType === "mouse") setActive(index);
                 }}
               >
-                <span className={styles.number}>{String(index + 1).padStart(2, "0")}</span>
                 <span className={styles.name}>{item.name}</span>
                 <span className={styles.arrow} aria-hidden="true">
                   →

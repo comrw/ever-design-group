@@ -17,14 +17,13 @@ export default function Services() {
       <div id="page-content">
         <Section title="The work behind the place.">
           <div className="serviceRows">
-            {services.map((s, i) => (
+            {services.map((s) => (
               <Link
                 href={`/services/${s.slug}`}
                 className="serviceRow"
                 key={s.slug}
                 data-reveal
               >
-                <span className="rowNum">0{i + 1}</span>
                 <h3>{s.title}</h3>
                 <p>{s.intro}</p>
                 <span className="rowArrow" aria-hidden>

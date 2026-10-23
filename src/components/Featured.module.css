@@ -54,7 +54,7 @@
 .noteText {
   margin-top: calc(10 * var(--u));
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.45;
 }
 

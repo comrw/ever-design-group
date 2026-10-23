@@ -30,13 +30,6 @@ export function PageHero({
           {intro}
         </p>
       </div>
-      <a
-        className="heroScroll"
-        href="#page-content"
-        aria-label="Explore this page"
-      >
-        Explore ↓
-      </a>
     </section>
   );
 }
@@ -192,7 +185,6 @@ export function SiteFooter() {
       </div>
       <div className="footerBottom">
         <p>© {new Date().getFullYear()} Ever Design Group</p>
-        <p>Kigali, Rwanda / Built around a story.</p>
       </div>
     </footer>
   );

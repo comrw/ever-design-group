@@ -106,11 +106,6 @@
   font-size: 13px;
 }
 
-.stripPlace {
-  top: calc(111 * var(--u));
-  left: var(--gutter);
-  font-size: 11px;
-}
 
 @media (min-width: 1024px) {
   .hero {
@@ -142,8 +137,5 @@
     font-size: 16px;
   }
 
-  .stripPlace {
-    top: calc(84 * var(--u));
-  }
 
 }
