@@ -1,0 +1,480 @@
+/*
+ * First-visit introduction (components/IntroLoader.tsx, lib/intro.ts).
+ *
+ * Hidden unless the boot script sets html[data-intro-state]. Times are seconds
+ * from first paint:
+ *   0.00  datum line draws across the screen
+ *   0.12  survey points and construction marks appear, then fade
+ *   0.28  the pavilion outline draws
+ *   0.72  "ever" rises from behind the roofline
+ *   0.92  Plan. Design. Build. with the orange accent passing through
+ *   1.45  sequence complete; the section opens once the first view is ready
+ *
+ * Home geometry mirrors components/Hero.module.css (--hero-h, roofline crop,
+ * "ever" and strip positions); keep the two in step.
+ */
+
+.il {
+  display: none;
+}
+
+/* The element carries `hidden`, so an unstyled page never shows it. */
+html[data-intro-state="play"] .il[hidden],
+html[data-intro-state="exit"] .il[hidden] {
+  display: block;
+}
+
+/* Scroll is held only while the layer covers the page. */
+html[data-intro-state="play"],
+html[data-intro-state="exit"] {
+  overflow: hidden;
+  animation: il-unlock 0s linear 7s forwards;
+}
+
+@keyframes il-unlock {
+  to {
+    overflow: visible;
+  }
+}
+
+.il {
+  /* Mobile hero frame: 390 x 740, roofline crop at 392. */
+  --hero-h: calc(740 * var(--u));
+  --cut: calc(392 * var(--u));
+  --stage-w: max(100cqw, calc(var(--hero-h) * 1344 / 752));
+
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  color: var(--ink);
+  touch-action: none;
+  /* Fail-safe independent of any script: never cover the site for long. */
+  animation: il-failsafe 0s linear 7s forwards;
+}
+
+@keyframes il-failsafe {
+  to {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .il {
+    /* Desktop hero frame: 1440 x 806, roofline crop at 436. */
+    --hero-h: calc(806 * var(--u));
+    --cut: calc(436 * var(--u));
+  }
+}
+
+/* Other pages: a centred composition with the cut through the middle. */
+html[data-intro="page"] .il {
+  --cut: 50%;
+  --stage-w: max(100cqw, 1100px);
+}
+
+/* ---------- The section: two sheets that are pulled apart ---------- */
+
+.il-panel {
+  position: absolute;
+  right: 0;
+  left: 0;
+  background: var(--paper);
+  transition: transform 0.75s cubic-bezier(0.76, 0, 0.18, 1) 0.15s;
+}
+
+.il-top {
+  top: 0;
+  height: var(--cut);
+}
+
+.il-bottom {
+  top: var(--cut);
+  bottom: 0;
+}
+
+/* The section cut: a line that snaps across just before the sheets part. */
+.il-top::after,
+.il-bottom::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.il-top::after {
+  bottom: 0;
+}
+
+.il-bottom::before {
+  top: 0;
+}
+
+html[data-intro-state="exit"] .il-top {
+  transform: translateY(-101%);
+}
+
+html[data-intro-state="exit"] .il-bottom {
+  transform: translateY(101%);
+}
+
+html[data-intro-state="exit"] .il-top::after,
+html[data-intro-state="exit"] .il-bottom::before {
+  transform: scaleX(1);
+}
+
+/* Drawing, lettering and logo stay in place and hand over to the real page. */
+.il-art {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.55s ease 0.3s;
+}
+
+html[data-intro-state="exit"] .il-art {
+  opacity: 0;
+}
+
+html[data-intro-state="exit"] .il {
+  pointer-events: none;
+}
+
+/* ---------- Original logo, where the header shows it ---------- */
+
+.il-logo {
+  position: absolute;
+  top: calc(16 * var(--u));
+  left: var(--gutter);
+  width: calc(112 * var(--u));
+  height: calc(52 * var(--u));
+  opacity: 0;
+  animation: il-fade 0.5s ease 0.05s forwards;
+}
+
+.il-logo-image {
+  object-fit: contain;
+}
+
+@media (min-width: 1024px) {
+  .il-logo {
+    width: calc(140 * var(--u));
+    height: calc(65 * var(--u));
+  }
+}
+
+/* Interior pages use the fixed-size header (SiteHeader .interior). */
+html[data-intro="page"] .il-logo {
+  top: 20px;
+  left: clamp(24px, 4vw, 80px);
+  width: 112px;
+  height: 52px;
+}
+
+@media (min-width: 1024px) {
+  html[data-intro="page"] .il-logo {
+    width: 140px;
+    height: 65px;
+  }
+}
+
+/* ---------- Drawing ---------- */
+
+.il-stage {
+  position: absolute;
+  top: calc(var(--hero-h) / 2);
+  left: calc(100cqw / 2);
+  width: var(--stage-w);
+  aspect-ratio: 1344 / 752;
+  transform: translate(-50%, -50%);
+}
+
+/* Centred composition: the roofline (y 406 of 752) sits on the cut. */
+html[data-intro="page"] .il-stage {
+  top: calc(var(--cut) - var(--stage-w) * 406 / 1344);
+  transform: translateX(-50%);
+}
+
+.il-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.15;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.il-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: il-draw 0.42s cubic-bezier(0.65, 0, 0.35, 1) var(--t, 0s) forwards;
+}
+
+@keyframes il-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.il-roof {
+  stroke-width: 1.5;
+  animation-duration: 0.5s;
+}
+
+/* Once the lettering arrives, the drawing steps back. */
+.il-outline {
+  animation: il-recede 0.5s ease 0.95s forwards;
+}
+
+.il-datum {
+  stroke-opacity: 0.85;
+  animation:
+    il-draw 0.5s cubic-bezier(0.7, 0, 0.2, 1) 0s forwards,
+    il-recede 0.5s ease 0.95s forwards;
+}
+
+@keyframes il-recede {
+  to {
+    opacity: 0.45;
+  }
+}
+
+/* Survey points: small orange crosses that appear and clear away. */
+.il-point {
+  stroke: var(--orange);
+  stroke-width: 1.4;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: il-point 0.95s cubic-bezier(0.22, 1, 0.36, 1) var(--t, 0s) forwards;
+}
+
+@keyframes il-point {
+  0% {
+    opacity: 0;
+    transform: scale(0.2) rotate(-45deg);
+  }
+  25% {
+    opacity: 1;
+    transform: none;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+/* Construction marks: dashed guides rise, a dimension line spans, all clear by 1.1s. */
+.il-construction {
+  stroke-width: 0.8;
+  stroke-opacity: 0.55;
+  animation: il-clear 0.3s ease 0.8s forwards;
+}
+
+@keyframes il-clear {
+  to {
+    opacity: 0;
+  }
+}
+
+.il-guide {
+  stroke-dasharray: 3 6;
+  transform: scaleY(0);
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: il-rise-line 0.45s cubic-bezier(0.22, 1, 0.36, 1) var(--t, 0s) forwards;
+}
+
+@keyframes il-rise-line {
+  to {
+    transform: none;
+  }
+}
+
+.il-dimension {
+  transform: scaleX(0);
+  transform-box: fill-box;
+  transform-origin: 0 50%;
+  animation: il-span 0.45s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards;
+}
+
+@keyframes il-span {
+  to {
+    transform: none;
+  }
+}
+
+/* ---------- Lettering: same treatment and position as the hero "ever" ---------- */
+
+.il-everclip {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: var(--cut);
+  overflow: hidden;
+}
+
+.il-everpos {
+  position: absolute;
+  top: calc(230 * var(--u));
+  left: calc(12 * var(--u));
+  font-size: calc(200 * var(--u));
+}
+
+@media (min-width: 1024px) {
+  .il-everpos {
+    top: calc(93 * var(--u));
+    left: calc(186 * var(--u));
+    font-size: calc(440 * var(--u));
+  }
+}
+
+html[data-intro="page"] .il-everpos {
+  top: auto;
+  bottom: -0.2em;
+  left: 50%;
+  font-size: clamp(130px, 26cqw, 360px);
+  transform: translateX(-50%);
+}
+
+.il-ever {
+  display: block;
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.09em;
+  white-space: nowrap;
+  transform: translateY(76.6%);
+  animation: il-rise 0.62s cubic-bezier(0.22, 1, 0.36, 1) 0.72s forwards;
+}
+
+@keyframes il-rise {
+  to {
+    transform: none;
+  }
+}
+
+/* ---------- Plan. Design. Build. (the hero strip's line, in ink) ---------- */
+
+.il-pdb {
+  position: absolute;
+  top: calc(620 * var(--u));
+  left: var(--gutter);
+  font-size: calc(20 * var(--u));
+  font-weight: 500;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+
+@media (min-width: 1024px) {
+  .il-pdb {
+    top: calc(706 * var(--u));
+    font-size: calc(28 * var(--u));
+  }
+}
+
+html[data-intro="page"] .il-pdb {
+  top: calc(var(--cut) + var(--stage-w) * 206 / 1344 + 28px);
+  left: 50%;
+  font-size: clamp(18px, 1.9cqw, 26px);
+  transform: translateX(-50%);
+}
+
+.il-word {
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+  animation: il-fade 0.28s ease var(--t, 0s) forwards;
+}
+
+/* The accent passes through Plan and Design and comes to rest under Build. */
+.il-word::after {
+  content: "";
+  position: absolute;
+  right: 0.22em;
+  bottom: -0.12em;
+  left: 0;
+  height: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: il-accent-pass 0.38s cubic-bezier(0.65, 0, 0.35, 1) var(--t, 0s) forwards;
+}
+
+.il-word-last::after {
+  animation-name: il-accent-rest;
+  animation-duration: 0.25s;
+}
+
+@keyframes il-accent-pass {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  51% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+}
+
+@keyframes il-accent-rest {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes il-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- Route-change line (components/RouteLine.tsx) ---------- */
+
+.route-line {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1001;
+  height: 2px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.route-line span {
+  display: block;
+  height: 100%;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* A survey tick where the line starts. */
+.route-line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 8px;
+  background: var(--orange);
+}

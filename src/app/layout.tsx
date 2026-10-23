@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import IntroLoader from "@/components/IntroLoader";
+import RouteLine from "@/components/RouteLine";
+import { introBootScript } from "@/lib/intro";
 import "./globals.css";
+import "./intro.css";
 
 const inter = localFont({
   src: [
@@ -28,8 +32,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body>{children}</body>
+    // The boot script sets data-intro attributes on <html> before hydration.
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: introBootScript }} />
+      </head>
+      <body>
+        <IntroLoader />
+        <RouteLine />
+        {children}
+      </body>
     </html>
   );
 }

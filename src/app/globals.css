@@ -38,6 +38,8 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-behavior: smooth;
+  /* Holding scroll during the introduction must not shift the layout. */
+  scrollbar-gutter: stable;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -47,6 +49,8 @@ html {
 }
 
 body {
+  /* --u resolves against this width (minus scrollbar) outside <main>, e.g. the intro layer. */
+  container-type: inline-size;
   margin: 0;
   background: var(--paper);
   color: var(--ink);
