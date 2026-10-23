@@ -63,9 +63,9 @@
     animation: rise 1.6s var(--ease-out) 0.15s both;
   }
 
-  /* The introduction has already raised the lettering; don't raise it twice. */
-  :global(html[data-intro]) .ever {
-    animation: none;
+  /* While the introduction covers the page, hold the entrance so it plays with the reveal. */
+  :global(html[data-intro-state="play"]) .ever {
+    animation-play-state: paused;
   }
 }
 

@@ -1,31 +1,44 @@
 /**
- * First-visit introduction: boot script.
+ * First-visit introduction: boot script and shared contract.
  *
- * Inlined in <head> so it runs before first paint and needs neither React nor
- * the JS bundle. It decides whether to play the introduction (once per tab
- * session, never with reduced motion, never without JavaScript), then marks
- * <html> with:
+ * Inlined in <head> so it runs before first paint, without React or the JS
+ * bundle. It decides whether to play the introduction (once per tab session,
+ * never with reduced motion, never without JavaScript) and owns its state:
  *
- *   data-intro="home" | "page"       which composition to draw (CSS reads it)
- *   data-intro-state="play" | "exit" | "done"
+ *   html[data-intro]       "home" | "page"   which reveal to use
+ *   html[data-intro-state] "play" → "exit" → "done"
  *
- * The drawing itself is CSS keyframes (see app/intro.css), so it starts at
- * first paint even on a slow connection. This script only waits until the
- * sequence has finished AND the critical first-view image and fonts are ready
- * (capped, so slow or failed assets never hold the page), then opens the
- * section. A timer and a CSS animation each independently uncover the page if
- * anything goes wrong.
+ * The drawing is animated by components/intro/IntroScene.tsx (GSAP), which
+ * calls `started()` when it begins and `exit()` when it ends. This script
+ * also handles "Skip intro" (button, Escape) so it works before hydration,
+ * and uncovers the page on its own if the scene never starts or overruns.
+ * A CSS animation in app/intro.css is a last, script-independent fail-safe.
  */
 
 /** sessionStorage key; present = the introduction already played in this tab. */
 export const INTRO_SESSION_KEY = "ever-intro";
 
-/** Longest the introduction waits for the first-view image and fonts. */
-const ASSET_CAP_MS = 3600;
-/** Matches the exit transition in app/intro.css (cut 0.15s + open 0.75s). */
-const EXIT_MS = 950;
-/** Hard fail-safe: the page is uncovered after this no matter what. */
-const FAILSAFE_MS = 6000;
+/** Length of the drawing before the reveal, in seconds (IntroScene timeline). */
+export const INTRO_SECONDS = 6;
+/** The reveal: section opens (matches app/intro.css transitions). */
+export const EXIT_MS = 900;
+/** If the scene has not started by then (slow or failed bundle), show the site. */
+const START_TIMEOUT_MS = 2500;
+/** Once started, the latest the reveal may begin. */
+const RUN_TIMEOUT_MS = INTRO_SECONDS * 1000 + 1500;
+
+export type IntroControl = {
+  /** Called by the scene when its timeline starts; false if the intro is no longer playing. */
+  started: () => boolean;
+  /** Begin the reveal (from the scene's last frame, Skip, Escape or a fail-safe). */
+  exit: () => void;
+};
+
+declare global {
+  interface Window {
+    __everIntro?: IntroControl;
+  }
+}
 
 export const introBootScript = `(function () {
   var d = document.documentElement;
@@ -40,75 +53,64 @@ export const introBootScript = `(function () {
   d.setAttribute("data-intro", location.pathname === "/" && !location.hash ? "home" : "page");
   d.setAttribute("data-intro-state", "play");
 
-  var t0 = performance.now();
   var state = "play";
+  var timer;
   function set(next) {
     if (state === "done") return;
     state = next;
     d.setAttribute("data-intro-state", next);
   }
-  function blockTab(e) {
-    if (e.key === "Tab") e.preventDefault();
+  function releaseFocus() {
+    var a = document.activeElement;
+    if (a && a.hasAttribute && a.hasAttribute("data-intro-skip")) a.blur();
   }
   function finish() {
+    clearTimeout(timer);
+    releaseFocus();
     set("done");
-    document.removeEventListener("keydown", blockTab, true);
+    document.removeEventListener("keydown", onKey, true);
+    document.removeEventListener("click", onClick, true);
   }
-  document.addEventListener("keydown", blockTab, true);
-  var failsafe = setTimeout(finish, ${FAILSAFE_MS});
+  function exit() {
+    if (state !== "play") return;
+    clearTimeout(timer);
+    releaseFocus();
+    set("exit");
+    timer = setTimeout(finish, ${EXIT_MS});
+  }
+  function onKey(e) {
+    if (state !== "play") return;
+    if (e.key === "Escape") {
+      e.preventDefault();
+      exit();
+    } else if (e.key === "Tab") {
+      // Only the skip control is reachable while the page is covered.
+      e.preventDefault();
+      var skip = document.querySelector("[data-intro-skip]");
+      if (skip) skip.focus();
+    }
+  }
+  function onClick(e) {
+    var t = e.target;
+    if (t && t.closest && t.closest("[data-intro-skip]")) {
+      e.preventDefault();
+      exit();
+    }
+  }
+  document.addEventListener("keydown", onKey, true);
+  document.addEventListener("click", onClick, true);
   addEventListener("pageshow", function (e) {
     if (e.persisted) finish();
   });
 
-  function exit() {
-    if (state !== "play") return;
-    set("exit");
-    setTimeout(function () {
-      clearTimeout(failsafe);
-      finish();
-    }, ${EXIT_MS});
-  }
-  function wait(ms) {
-    return new Promise(function (r) { setTimeout(r, ms); });
-  }
-  function settled(p) {
-    return p.then(function () {}, function () {});
-  }
-
-  function whenReady() {
-    var loader = document.querySelector(".il");
-    var sequence = loader && loader.getAnimations
-      ? Promise.all(loader.getAnimations({ subtree: true })
-          .filter(function (a) { return !/failsafe/.test(a.animationName || ""); })
-          .map(function (a) { return settled(a.finished); }))
-      : wait(1450);
-
-    // Only the first-view image(s) Next marks as priority, and the fonts.
-    var critical = [].slice.call(document.querySelectorAll('img[fetchpriority="high"]'))
-      .filter(function (img) { return img.getBoundingClientRect().top < innerHeight; })
-      .map(function (img) {
-        if (img.complete) return 0;
-        return new Promise(function (r) {
-          img.addEventListener("load", r, { once: true });
-          img.addEventListener("error", r, { once: true });
-        });
-      });
-    if (document.fonts) critical.push(settled(document.fonts.ready));
-    var cap = wait(Math.max(0, ${ASSET_CAP_MS} - (performance.now() - t0)));
-
-    Promise.all([sequence, Promise.race([Promise.all(critical), cap])]).then(exit, exit);
-  }
-
-  function start() {
-    try {
-      whenReady();
-    } catch (e) {
-      exit();
-    }
-  }
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", start, { once: true });
-  } else {
-    start();
-  }
+  timer = setTimeout(exit, ${START_TIMEOUT_MS});
+  window.__everIntro = {
+    started: function () {
+      if (state !== "play") return false;
+      clearTimeout(timer);
+      timer = setTimeout(exit, ${RUN_TIMEOUT_MS});
+      return true;
+    },
+    exit: exit,
+  };
 })();`;

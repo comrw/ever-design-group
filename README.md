@@ -97,6 +97,36 @@ shown in its final, complete state. Everything works with the keyboard (skip lin
 visible focus rings, real buttons and links) and on touch devices. All imagery keeps
 its "illustrative concept" labels.
 
+### First-visit introduction
+
+A six-second line drawing plays once per browser tab:
+1. an architect draws a plan
+2. the plan grows into the foundation
+3. a builder raises the structure
+4. the completed pavilion appears, followed by "Plan. Design. Build."
+
+The layer then opens into the page. It's a brand introduction, not a progress indicator.
+
+- `src/lib/intro.ts`: a tiny inline boot script in `<head>`. It decides whether to play
+  (not again in the same tab, never with reduced motion, never without JavaScript), owns
+  `html[data-intro-state]` (`play` → `exit` → `done`), and handles **Skip intro** and Escape.
+  If the animation hasn't started within 2.5s (e.g. a slow or failed bundle), it shows the
+  site straight away.
+- `src/components/intro/`: the SVG artwork (`art.ts`, drawn in the hero photo's pixel
+  space so the finished pavilion lands on the real one), the static markup
+  (`IntroLoader.tsx`) and the GSAP timeline and camera (`IntroScene.tsx`).
+- `src/app/intro.css`: hides the layer unless the intro is playing, holds scrolling, opens the
+  layer on exit, and adds a script-independent fail-safe (the layer can never stay over
+  the site for more than 12s).
+- Page entrances (the hero "ever" and the scroll-triggered reveals) wait for the opening
+  instead of playing unseen behind the layer.
+
+To see it again in the same tab, clear the `ever-intro` key from sessionStorage, or open a
+new tab.
+
+Internal navigations that take longer than 220ms show a thin orange line at the top
+(`src/components/RouteLine.tsx`). Instant navigations show nothing.
+
 ## Assets
 
 All imagery, the logo and the play-mark SVGs were downloaded from the Figma file and

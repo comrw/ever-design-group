@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import IntroLoader from "@/components/IntroLoader";
+import IntroLoader from "@/components/intro/IntroLoader";
 import RouteLine from "@/components/RouteLine";
 import { introBootScript } from "@/lib/intro";
 import "./globals.css";
