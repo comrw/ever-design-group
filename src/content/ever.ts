@@ -2,18 +2,23 @@
  * See docs/content-sources.md. Commercial prices and legal claims deliberately
  * await client verification; they are not inferred from imagery. */
 export const sourceImage = (path: string) => `/source/images/${path}`;
-/** Contact/profile publication is pending explicit approval for the public repository.
- * Configure these public-facing values after that approval; no secrets belong here. */
 export const contact = {
-  phone: "",
-  whatsapp: "",
-  email: "",
-  address: "Kigali, Rwanda",
+  phone: "+250 787 524 298",
+  whatsapp: "https://wa.me/250787524298",
+  email: "info@everdesigngroupe.com",
+  address: "42 KG 670 St, Kimihurura, Kigali, Rwanda",
   hours: "Monday–Friday, 8am–5pm CAT",
-  instagram: "",
-  linkedin: "",
+  instagram: "https://www.instagram.com/everdesigngroup/",
+  linkedin: "https://www.linkedin.com/company/ever-design1/",
 };
-export const team: string[][] = [];
+export const team = [
+  ["Theophile", "CEO", "theophier.jpeg"],
+  ["Yvette", "Architecture Manager", "yvetter.jpeg"],
+  ["Doris", "Hospitality & Tourism Manager", "doris.jpeg"],
+  ["Sophie", "Accountant", "sophie.jpeg"],
+  ["Eric", "IT", "eric-passport.jpeg"],
+  ["Rusagara", "Procurement Officer", "rusagara.jpeg"],
+];
 export const services = [
   {
     slug: "architecture",

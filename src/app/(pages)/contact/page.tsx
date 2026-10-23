@@ -46,6 +46,7 @@ export default async function Contact({
             <div data-reveal>
               <h3>The studio</h3>
               <p>{contact.address}</p>
+              <TextLink href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.address)}`}>Find the office</TextLink>
             </div>
             <div data-reveal>
               <h3>Office hours</h3>

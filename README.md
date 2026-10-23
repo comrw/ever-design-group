@@ -117,4 +117,4 @@ Validation: `npm run lint`, `npx tsc --noEmit`, `npm run build`, then `npm run t
 
 Maintenance: Next.js and eslint-config-next were updated together to 15.5.28, with React / React DOM 19.1.7, after the original 15.5.4 installation reported a security advisory. The existing Next.js 15 architecture is retained.
 
-Public-repository review: direct contact channels, street address and named team profiles are currently left unconfigured pending explicit publication approval. The client source is public, but automatic approval review blocked copying those fields into this public repository. Team portraits are withheld as well. Their absence does not affect the remaining routes or media. Set the contact fields and team list in `src/content/ever.ts` after approval.
+Public contact channels, office address, social links and named team profiles/portraits from the client source were approved for publication by the user on 23 October 2026. They are configured in `src/content/ever.ts`. Enquiry form delivery still requires its endpoint.

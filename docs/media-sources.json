@@ -442,5 +442,41 @@
     "local": "/videos/cottage-hillside.mp4",
     "description": "Silent architectural animation, Cottage hillside, 14.083 seconds, 1280\u00d7752",
     "bytes": 1262610
+  },
+  {
+    "source": "https://everdesigninvestments.vercel.app/images/team/theophier.jpeg",
+    "local": "/source/images/team/theophier.jpeg",
+    "description": "Theophile - CEO at Ever Design",
+    "bytes": 364135
+  },
+  {
+    "source": "https://everdesigninvestments.vercel.app/images/team/yvetter.jpeg",
+    "local": "/source/images/team/yvetter.jpeg",
+    "description": "Yvette - Architecture Manager at Ever Design",
+    "bytes": 69454
+  },
+  {
+    "source": "https://everdesigninvestments.vercel.app/images/team/doris.jpeg",
+    "local": "/source/images/team/doris.jpeg",
+    "description": "Doris - Hospitality & Tourism Manager at Ever Design",
+    "bytes": 53208
+  },
+  {
+    "source": "https://everdesigninvestments.vercel.app/images/team/sophie.jpeg",
+    "local": "/source/images/team/sophie.jpeg",
+    "description": "Sophie - Accountant at Ever Design",
+    "bytes": 20891
+  },
+  {
+    "source": "https://everdesigninvestments.vercel.app/images/team/eric-passport.jpeg",
+    "local": "/source/images/team/eric-passport.jpeg",
+    "description": "Eric - IT at Ever Design",
+    "bytes": 68522
+  },
+  {
+    "source": "https://everdesigninvestments.vercel.app/images/team/rusagara.jpeg",
+    "local": "/source/images/team/rusagara.jpeg",
+    "description": "Rusagara - Procurement Officer at Ever Design",
+    "bytes": 25376
   }
 ]
