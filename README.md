@@ -102,3 +102,19 @@ its "illustrative concept" labels.
 All imagery, the logo and the play-mark SVGs were downloaded from the Figma file and
 are stored in `public/`. Nothing has been swapped for stock imagery. The logo is shown
 with `object-fit: contain`, so its aspect ratio is preserved.
+
+## Multipage extension
+
+Branch `feat/multipage` extends `feat/website` while preserving the approved homepage composition and original motion. The primary nav now opens Home, Developments, Services and Studio. The mobile menu and shared footer expose the complete site.
+
+Routes: `/about`, `/services` and five service detail pages, `/process`, `/developments` and seven project detail pages, `/portfolio` (filterable), `/areas` and six place pages, `/films`, `/contact`. `/studio` and `/villa-tours` redirect to the matching pages. Project enquiries preserve their context in the contact form.
+
+Content is centralized in `src/content/ever.ts`. Shared page pieces are in `Editorial.tsx`, with GSAP reveal and image motion in `PageExperience.tsx`. Reduced-motion mode and no-JavaScript output keep editorial content visible. The original homepage components and motion remain in place. New pages use fluid layouts rather than extending the original fixed Figma section heights.
+
+Source content and media provenance: `docs/content-sources.md` and `docs/media-sources.json`. Assets live in `public/source/images`; the Cottage project video is `public/videos/cottage-hillside.mp4`. Run `npm ci`, `npm run dev`, then open http://localhost:3000. Configuration for film and enquiry delivery is unchanged. No form service, deployment or payment processing is configured by this extension.
+
+Validation: `npm run lint`, `npx tsc --noEmit`, `npm run build`, then `npm run test:routes`. The route smoke test starts and stops its own production server on port 3210, checks every content route and linked internal URL, image responses, aliases, project enquiry context, missing-project 404 and video byte ranges. It does not submit an enquiry or contact third parties. Browser visual and interaction validation is still required on desktop and mobile; the cloud browser in the implementation environment could not reach the local preview server.
+
+Maintenance: Next.js and eslint-config-next were updated together to 15.5.28, with React / React DOM 19.1.7, after the original 15.5.4 installation reported a security advisory. The existing Next.js 15 architecture is retained.
+
+Public contact channels, office address, social links and named team profiles/portraits from the client source were approved for publication by the user on 23 October 2026. They are configured in `src/content/ever.ts`. Enquiry form delivery still requires its endpoint.

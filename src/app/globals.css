@@ -50,7 +50,13 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-inter), "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family:
+    var(--font-inter),
+    "Inter",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
   font-weight: 400;
   font-feature-settings: normal;
   -webkit-font-smoothing: antialiased;
@@ -147,4 +153,87 @@ section[id] {
 
 .skip-link:focus-visible {
   transform: none;
+}
+
+/* Multipage footer sits outside the original Figma-scaled landing page. */
+.siteFooter {
+  padding: 70px clamp(24px, 4vw, 80px) 25px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.footerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 55px;
+  border-bottom: 1px solid #c4c5bc;
+}
+.footerWordmark {
+  font-size: clamp(100px, 17vw, 260px);
+  letter-spacing: -0.09em;
+  line-height: 0.8;
+}
+.footerWordmark span {
+  font-size: 16px;
+  letter-spacing: 0;
+  vertical-align: top;
+  display: inline-block;
+  margin: 20px 0 0 10px;
+}
+.footerTop > p {
+  font-size: clamp(24px, 3vw, 45px);
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+}
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.4fr 0.7fr;
+  gap: 40px;
+  padding: 45px 0 65px;
+}
+.footerGrid .kicker {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  margin-bottom: 22px;
+  color: var(--muted);
+}
+.footerGrid a,
+.footerGrid > div > p:not(.kicker) {
+  display: block;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 5px 0;
+  overflow-wrap: anywhere;
+}
+.footerGrid a:hover {
+  color: var(--orange);
+}
+.footerBottom {
+  border-top: 1px solid #c4c5bc;
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+@media (max-width: 800px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 35px 24px;
+  }
+  .footerTop {
+    padding-bottom: 35px;
+  }
+  .footerTop > p {
+    font-size: 24px;
+  }
+  .footerBottom {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .footerWordmark span {
+    margin-top: 5px;
+  }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import { contact } from "@/content/ever";
 import { enquiryConfig } from "@/lib/config";
 import EverAction from "./EverAction";
 import styles from "./Enquiry.module.css";
@@ -15,11 +16,41 @@ type Status =
   | { kind: "unconfigured" }
   | { kind: "failed" };
 
-const FIELDS: { name: FieldName; label: string; type: string; autoComplete: string; required: boolean }[] = [
-  { name: "name", label: "Your name", type: "text", autoComplete: "name", required: true },
-  { name: "email", label: "Email address", type: "email", autoComplete: "email", required: true },
-  { name: "location", label: "Project location", type: "text", autoComplete: "off", required: false },
-  { name: "project", label: "What would you like to develop?", type: "text", autoComplete: "off", required: true },
+const FIELDS: {
+  name: FieldName;
+  label: string;
+  type: string;
+  autoComplete: string;
+  required: boolean;
+}[] = [
+  {
+    name: "name",
+    label: "Your name",
+    type: "text",
+    autoComplete: "name",
+    required: true,
+  },
+  {
+    name: "email",
+    label: "Email address",
+    type: "email",
+    autoComplete: "email",
+    required: true,
+  },
+  {
+    name: "location",
+    label: "Project location",
+    type: "text",
+    autoComplete: "off",
+    required: false,
+  },
+  {
+    name: "project",
+    label: "What would you like to develop?",
+    type: "text",
+    autoComplete: "off",
+    required: true,
+  },
 ];
 
 const EMPTY: Values = { name: "", email: "", location: "", project: "" };
@@ -29,14 +60,23 @@ function validate(values: Values): Errors {
   const errors: Errors = {};
   if (!values.name.trim()) errors.name = "Please enter your name.";
   if (!values.email.trim()) errors.email = "Please enter your email address.";
-  else if (!EMAIL.test(values.email.trim())) errors.email = "Please enter a valid email address, like name@example.com.";
-  if (!values.project.trim()) errors.project = "Please tell us what you would like to develop.";
+  else if (!EMAIL.test(values.email.trim()))
+    errors.email = "Please enter a valid email address, like name@example.com.";
+  if (!values.project.trim())
+    errors.project = "Please tell us what you would like to develop.";
   return errors;
 }
 
 /** 06 / Start a project — enquiry, with the footer. */
-export default function Enquiry() {
-  const [values, setValues] = useState<Values>(EMPTY);
+export default function Enquiry({
+  initialProject = "",
+}: {
+  initialProject?: string;
+}) {
+  const [values, setValues] = useState<Values>({
+    ...EMPTY,
+    project: initialProject.slice(0, 600),
+  });
   const [errors, setErrors] = useState<Errors>({});
   const [attempted, setAttempted] = useState(false);
   const [status, setStatus] = useState<Status>({ kind: "idle" });
@@ -59,7 +99,9 @@ export default function Enquiry() {
     const firstInvalid = FIELDS.find((field) => found[field.name]);
     if (firstInvalid) {
       setStatus({ kind: "idle" });
-      formRef.current?.querySelector<HTMLInputElement>(`[name="${firstInvalid.name}"]`)?.focus();
+      formRef.current
+        ?.querySelector<HTMLInputElement>(`[name="${firstInvalid.name}"]`)
+        ?.focus();
       return;
     }
 
@@ -72,7 +114,10 @@ export default function Enquiry() {
     try {
       const response = await fetch(enquiryConfig.endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({
           name: values.name.trim(),
           email: values.email.trim(),
@@ -80,7 +125,8 @@ export default function Enquiry() {
           project: values.project.trim(),
         }),
       });
-      if (!response.ok) throw new Error(`Enquiry endpoint responded ${response.status}`);
+      if (!response.ok)
+        throw new Error(`Enquiry endpoint responded ${response.status}`);
       setStatus({ kind: "sent" });
       setValues(EMPTY);
       setAttempted(false);
@@ -90,18 +136,32 @@ export default function Enquiry() {
   };
 
   return (
-    <section id="enquiry" className={styles.section} aria-labelledby="enquiry-title">
+    <section
+      id="enquiry"
+      className={styles.section}
+      aria-labelledby="enquiry-title"
+    >
       <div className={styles.copy}>
-        <p className={styles.eyebrow}>A DESTINATION BEGINS WITH A CONVERSATION.</p>
+        <p className={styles.eyebrow}>
+          A DESTINATION BEGINS WITH A CONVERSATION.
+        </p>
         <h2 id="enquiry-title" className={styles.title}>
           What are
           <br />
           you imagining?
         </h2>
-        <p className={styles.lede}>Tell us about your land, location or idea.</p>
+        <p className={styles.lede}>
+          Tell us about your land, location or idea.
+        </p>
       </div>
 
-      <form ref={formRef} className={styles.form} noValidate onSubmit={onSubmit} aria-label="Project enquiry">
+      <form
+        ref={formRef}
+        className={styles.form}
+        noValidate
+        onSubmit={onSubmit}
+        aria-label="Project enquiry"
+      >
         {FIELDS.map((field) => {
           const id = `enquiry-${field.name}`;
           const error = errors[field.name];
@@ -109,7 +169,9 @@ export default function Enquiry() {
             <div key={field.name} className={styles.field}>
               <label htmlFor={id} className={styles.label}>
                 {field.label}
-                {!field.required ? <span className="sr-only"> (optional)</span> : null}
+                {!field.required ? (
+                  <span className="sr-only"> (optional)</span>
+                ) : null}
               </label>
               <input
                 id={id}
@@ -135,20 +197,34 @@ export default function Enquiry() {
           );
         })}
 
-        <EverAction type="submit" className={styles.submit} disabled={status.kind === "sending"} />
+        <EverAction
+          type="submit"
+          className={styles.submit}
+          disabled={status.kind === "sending"}
+        />
 
         <div className={styles.status} role="status" aria-live="polite">
           {status.kind === "sending" ? <p>Sending your enquiry…</p> : null}
-          {status.kind === "sent" ? <p>Thank you. Your enquiry has been sent.</p> : null}
+          {status.kind === "sent" ? (
+            <p>Thank you. Your enquiry has been sent.</p>
+          ) : null}
           {status.kind === "unconfigured" ? (
             <p className={styles.notice}>
-              Your enquiry has not been sent. Online enquiries are not connected yet, so this form cannot deliver
-              messages. Your details are still here and have not been stored.
+              Your enquiry has not been sent. Online enquiries are not connected
+              yet, so this form cannot deliver messages. Your details are still
+              here and have not been stored.{" "}
+              {contact.whatsapp && (
+                <>
+                  {" "}
+                  Contact us on <a href={contact.whatsapp}>WhatsApp</a> instead.
+                </>
+              )}
             </p>
           ) : null}
           {status.kind === "failed" ? (
             <p className={styles.notice}>
-              Your enquiry could not be sent. Please check your connection and try again.
+              Your enquiry could not be sent. Please check your connection and
+              try again.
             </p>
           ) : null}
         </div>
@@ -156,7 +232,13 @@ export default function Enquiry() {
 
       <footer className={styles.footer}>
         <p className={styles.footerName}>EVER DESIGN GROUP</p>
-        <p className={styles.footerPlace}>Kigali, Rwanda</p>
+        <p className={styles.footerPlace}>
+          {contact.email ? (
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>
+          ) : (
+            "Kigali, Rwanda"
+          )}
+        </p>
       </footer>
     </section>
   );
